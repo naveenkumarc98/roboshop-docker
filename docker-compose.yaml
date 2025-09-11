@@ -2,7 +2,7 @@ networks:
   default:
       driver: bridge
       name: roboshop
-      external: true
+      #external: true
 services:
   mongodb:
     image: nawin1298/mongodb:v1
