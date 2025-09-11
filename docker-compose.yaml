@@ -1,0 +1,45 @@
+networks:
+  default:
+      driver: bridge
+      name: roboshop
+      external: true
+services:
+  mongodb:
+    image: nawin1298/mongodb:v1
+    container_name: mongodb
+
+  catalogue: 
+    image: nawin1298/catalogue:v1
+    container_name: catalogue
+    depends_on: 
+    - mongodb
+  redis:
+    image: redis:7.0
+    container_name: redis
+
+  user:
+    image: nawin1298/user:v1
+    container_name: user
+    depends_on:
+    - mongodb
+    - redis
+  cart: 
+    image: nawin1298/cart:v1
+    container_name: cart
+    depends_on:
+    - catalogue
+    - redis
+  mysql:
+    image: nawin1298/mysql:v1
+    container_name: mysql
+    
+
+  shipping:
+    image: nawin1298/shipping:v1
+    container_name: shipping
+    depends_on:
+    - mysql
+    - cart
+  
+
+
